@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="HealthServiceHub.MainPage"
+             Padding="0,20,0,0"
+             >
+
+    <StackLayout>
+        <StackLayout>
+            <Label Text="Health Service Hub" TextColor="#0C7768" FontSize="30" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="{Binding loggedId}" TextColor="#0C7768" FontSize="30" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+        </StackLayout>
+        <Grid BackgroundColor="#E2D6D6" RowSpacing="40" ColumnSpacing="40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Grid.ColumnSpan="2"  Text="Профил" BackgroundColor="#0C7768" TextColor="White" FontSize="20" FontAttributes="Bold"/>
+            <Button Grid.Row="1" Grid.Column="0" Text="Данни" BackgroundColor="#0C7768" TextColor="White" FontSize="20" FontAttributes="Bold"/>
+            <Button Grid.Row="1" Grid.Column="1"  Text="Инфо" BackgroundColor="#0C7768" TextColor="White" FontSize="20" FontAttributes="Bold"/>
+        </Grid>
+    </StackLayout>
+
+</ContentPage>

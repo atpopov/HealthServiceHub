@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="HealthServiceHub.LogInPage">
+    <StackLayout>
+        <StackLayout>
+            <Label Text="Health Service Hub" FontSize="30" HorizontalOptions="Center" TextColor="#0C7768" FontAttributes="Bold"/>
+            <Label Text="Добре дошли," FontSize="25" HorizontalOptions="Center" FontAttributes="Italic" />
+            <Label Text="моля въведете данните си за вход!" FontSize="25" HorizontalOptions="Center" FontAttributes="Italic" />
+        </StackLayout>
+        <StackLayout Padding="0,100,0,0" Spacing="25">
+            <Entry x:Name="EntryUserKey" Placeholder="Тел. Номер" FontSize="30"/>
+            <Entry x:Name="EntryPassword" IsPassword="True" Placeholder="Парола" FontSize="30"/>
+            <Button Text="Вход" BorderRadius="30"  TextColor="#0C7768" Clicked="LogInProcedure"/>
+            <Button Text="Регистрация" BorderRadius="30"  TextColor="#0C7768" Clicked="RegisterProcedure"/>
+        </StackLayout>
+        
+    </StackLayout>
+
+</ContentPage>
