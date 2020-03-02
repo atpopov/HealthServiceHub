@@ -1,18 +1,20 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace HealthServiceHub
 {
-    class User
+    public class User
     {
 
-        public User(string id, string password)
-        {
-            this.Password = password;
-            this.Id = id;
-        }
-        public string Id { get; set; }
+        [PrimaryKey, AutoIncrement, Unique]
+        public int Id { get; set; }
+        [Unique, NotNull]
+        public string PhNumber { get; set; }
+        [NotNull]
         public string Password { get; set; }
+        [NotNull]
+        public string Position { get; set; }
     }
 }

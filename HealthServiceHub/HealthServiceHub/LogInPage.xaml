@@ -12,6 +12,12 @@
             <Label Text="моля въведете данните си за вход!" FontSize="25" HorizontalOptions="Center" FontAttributes="Italic" />
         </StackLayout>
         <StackLayout Padding="0,100,0,0" Spacing="25">
+            <Picker x:Name="PositionPicker" FontSize="25" Title="Изберете длъжност">
+                <Picker.Items>
+                    <x:String>Лекар</x:String>
+                    <x:String>Пациент</x:String>
+                </Picker.Items>
+            </Picker>
             <Entry x:Name="EntryUserKey" Placeholder="Тел. Номер" FontSize="30"/>
             <Entry x:Name="EntryPassword" IsPassword="True" Placeholder="Парола" FontSize="30"/>
             <Button Text="Вход" BorderRadius="30"  TextColor="#0C7768" Clicked="LogInProcedure"/>

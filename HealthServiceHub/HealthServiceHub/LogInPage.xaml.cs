@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,31 +14,41 @@ namespace HealthServiceHub
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LogInPage : ContentPage
     {
-        string loggedId;
-        Dictionary<string, string> usPassDict = new Dictionary<string, string>();
+        private SQLiteConnection connection = DependencyService.Get<ISQLiteDb>().GetConnection();
         public LogInPage()
         {
             InitializeComponent();
-        }
 
-        private async void LogInProcedure(object sender, EventArgs e)
+            connection.CreateTable<User>();
+        }
+        private  void LogInProcedure(object sender, EventArgs e)
         {
-            string tempPass;
-            if(usPassDict.ContainsKey(EntryUserKey.Text))
-            {
-                usPassDict.TryGetValue(EntryUserKey.Text, out tempPass);
-                if (tempPass == EntryPassword.Text) { await DisplayAlert("Успешен вход!", "Добре дошли!", "ОК"); loggedId = EntryUserKey.Text; await Navigation.PushAsync(new MainPage()); }
-                else await DisplayAlert("Неуспешен вход!", "Грешна парола. Моля опитайте отново!", "ОК");
-            }
-            else await DisplayAlert("Неуспешен вход!", "Грешен код!", "ОК");
+            User user = new User { PhNumber = EntryUserKey.Text, Password = EntryPassword.Text };
+            
         }
 
         private void RegisterProcedure(object sender, EventArgs e)
         {
-            if (usPassDict.ContainsKey(EntryUserKey.Text)) DisplayAlert("Грешка", "Кодът е вече зает.", "OK");
+            User user = new User {Position=PositionPicker.Items[PositionPicker.SelectedIndex], PhNumber = EntryUserKey.Text, Password = EntryPassword.Text };
+            SQLiteCommand cmd = new SQLiteCommand(connection);
+
+            
+
+            cmd.CommandText = $"SELECT * FROM User Where PhNumber = {user.PhNumber}";
+            int count = 0;
+            SqliteDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                count++;
+            }
+            if(count == 1)
+            {
+                DisplayAlert("Грешка", "Номерът е вече регистриран.", "OK");
+            }
             else
             {
-                usPassDict.Add(EntryUserKey.Text, EntryPassword.Text);
+                cmd.CommandText = $"INSERT INTO User(Position, PhNumber, Password) VALUES ('{user.Position}','{user.PhNumber}','{user.Password}')";
+                cmd.ExecuteNonQuery();
                 DisplayAlert("Успех", "Регистрацията Ви е успешна!", "ОК");
             }
         }
